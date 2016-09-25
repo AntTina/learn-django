@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>My first echarts~~</title>
+        {% load staticfiles %}
+        <script src="{% static 'echart/echarts.min.js' %}"></script>
+    </head>
+    <body>
+        <div id="main" style="width:600px;height:400px;"></div>
+        <script type="text/javascript">
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                title: { text:'Disk Usage',subtext:'partition' },
+                tooltip: {},
+                legend: { data:['usage']},
+                xAxis: { data:['/','/boot','/yum']},
+                yAxis: {},
+                series: [{
+                    name: 'usage',
+                    type: 'bar',
+                    data:[ {{ u1}}, {{ u2 }}, {{ u3 }} ]},
+                ]
+            };
+            myChart.setOption(option);
+        </script>
+    </body>
+</html>

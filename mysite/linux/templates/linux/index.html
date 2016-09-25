@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Linux~~</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'linux/style.css' %}"</link>
+    	<link href="{% static 'linux/bootstrap.css' %}" rel="stylesheet" type="text/css"></link>
+    	<script src="{% static 'linux/jquery.min.js' %}"></script>
+    	<script src="{% static 'linux/bootstrap.js' %}"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+                <div class="col-md-12">
+                    <h1>Welcome to Linux Monitor System</h1>
+					<p>Prosperity discovers vice,adversity virtue.</p>
+                </div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar navbar-inverse">
+					<div class="row">
+                		<div class="col-md-12 navbar-header">
+      					<a class="navbar-brand" href="http://172.16.88.19:8080/linux">Linux info</a>
+						<a class="navbar-brand" href="http://172.16.88.19:8080/admin/">Mysql info</a>
+						<form class="navbar-form navbar-left" role="search" action="{% url 'index_form' %}" method="post">
+						{% csrf_token %}
+       						<div class="form-group">
+          						<input type="text" class="form-control" placeholder="Command" name="command">
+        					</div>
+        					<button type="submit" class="btn btn-default">Submit</button>
+      					</form>
+						</div>
+					</div>
+					</nav>
+				</div>
+			</div>
+		 	<div class="row">
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<a href="{% url 'index_cmd' 'iostat' %}" class="btn btn-block btn-primary">iostat</a>
+					<a href="{% url 'index_cmd' 'netstat -tulnp' %}" class="btn btn-block btn-primary">netstat</a>
+					<a href="{% url 'index_cmd' 'uptime' %}" class="btn btn-block btn-primary">uptime</a>
+       				<a href="{% url 'index_cmd' 'who' %}" class="btn btn-block btn-primary">who</a>
+        			<a href="{% url 'index_cmd' 'ifconfig' %}" class="btn btn-block btn-primary">ifconfig</a>
+        			<a href="{% url 'index_cmd' 'free -m' %}" class="btn btn-block btn-primary">free -m</a>			
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-6">
+					{% if  cmd %}
+						<p> The command you input is <strong>{{ cmd }}</strong></p>
+						<pre>{{ results }}</pre>
+					{% else %}
+						<p> Overview</p>
+						<pre>{{ results }}</pre>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

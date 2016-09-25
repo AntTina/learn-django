@@ -1,0 +1,12 @@
+{% load staticfiles %}
+<link rel='stylesheet' type='text/css' href="{% static 'polls/style.css' %}"/>
+
+{% if bianliang %}
+	<ul>
+	    {% for question in bianliang %}
+		    <li><a href="/polls/{{ question.id }}/">{{ question.id }} {{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+	<p>No polls are available</p>
+{% endif %}
